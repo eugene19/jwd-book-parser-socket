@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class ParagraphParser extends AbstractParser {
 
-    private static final String SENTENCE_PATTERN = ".+[.!?\\n]";
+    private static final String SENTENCE_PATTERN = ".+?(([.!?]\\s?)|(\\n))";
 
     public ParagraphParser() {
         super(new SentenceParser());

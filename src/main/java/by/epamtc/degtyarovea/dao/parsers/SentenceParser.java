@@ -1,5 +1,6 @@
 package by.epamtc.degtyarovea.dao.parsers;
 
+import by.epamtc.degtyarovea.entity.SentencePart;
 import by.epamtc.degtyarovea.entity.TextComponent;
 import by.epamtc.degtyarovea.entity.TextComposite;
 
@@ -8,10 +9,10 @@ import java.util.regex.Pattern;
 
 public class SentenceParser extends AbstractParser {
 
-    private static final String WORD_PATTERN = "[-\\w,:()\"]+";
+    private static final String WORD_PATTERN = "(([-\\w\\.\\n]+\\s?)|([-=()'%,\\\":;]\\s?))";
 
     public SentenceParser() {
-        super(new WordParser());
+        super(null);
     }
 
     @Override
@@ -21,9 +22,7 @@ public class SentenceParser extends AbstractParser {
 
         while (matcher.find()) {
             String word = matcher.group();
-            TextComponent wordComponent = parseNext(word);
-
-            sentence.addChildren(wordComponent);
+            sentence.addChildren(new SentencePart(word));
         }
 
         return sentence;

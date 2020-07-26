@@ -24,11 +24,6 @@ public class FileBookDAO implements BookDAO {
         try {
             String text = reader.readAllText();
             book = parser.parse(text);
-
-            System.out.println(book);
-
-            System.out.println();
-
         } catch (IOException e) {
             e.printStackTrace();
         }

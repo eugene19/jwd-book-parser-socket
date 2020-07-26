@@ -1,15 +1,16 @@
 package by.epamtc.degtyarovea.controller;
 
-import by.epamtc.degtyarovea.dao.BookDAO;
-import by.epamtc.degtyarovea.dao.impl.FileBookDAO;
-import by.epamtc.degtyarovea.entity.TextComponent;
+import by.epamtc.degtyarovea.service.BookService;
 
 public class Main {
 
     public static void main(String[] args) {
-        BookDAO dao = new FileBookDAO();
-        TextComponent book = dao.createBook();
+        BookService service = new BookService();
+        String firstSentence;
 
-        System.out.println(book.text());
+//        firstSentence = service.printEachSentenceInNewLine();
+        firstSentence = service.sentenceOrderByWordCount();
+
+        System.out.println(firstSentence);
     }
 }
