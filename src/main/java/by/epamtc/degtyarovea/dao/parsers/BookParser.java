@@ -46,7 +46,9 @@ public class BookParser extends AbstractParser {
                 TextComposite sentence = new TextComposite();
                 sentence.addChildren(new SentencePart(codeLines.toString()));
 
-                book.addChildren(sentence);
+                TextComposite paragr = new TextComposite();
+                paragr.addChildren(sentence);
+                book.addChildren(paragr);
             } else {
                 TextComponent paragraphComponent = parseNext(paragraph);
                 book.addChildren(paragraphComponent);

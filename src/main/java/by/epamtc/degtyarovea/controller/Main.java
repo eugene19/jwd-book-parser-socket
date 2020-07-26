@@ -8,8 +8,8 @@ public class Main {
         BookService service = new BookService();
         String firstSentence;
 
-//        firstSentence = service.printEachSentenceInNewLine();
-        firstSentence = service.sentenceOrderByWordCount();
+        firstSentence = service.orderSentencesByWordsCount();
+        //firstSentence = service.wordInFirstSentenceAbsentInAnother();
 
         System.out.println(firstSentence);
     }
