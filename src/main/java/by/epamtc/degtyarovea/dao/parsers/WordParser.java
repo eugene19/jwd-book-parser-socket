@@ -5,8 +5,8 @@ import by.epamtc.degtyarovea.entity.TextComponent;
 
 public class WordParser extends AbstractParser {
 
-    public WordParser() {
-        super(null);
+    public WordParser(AbstractParser nextParser) {
+        this.nextParser = nextParser;
     }
 
     @Override

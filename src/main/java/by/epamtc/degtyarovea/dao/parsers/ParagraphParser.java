@@ -10,8 +10,8 @@ public class ParagraphParser extends AbstractParser {
 
     private static final String SENTENCE_PATTERN = ".+?(([.!?]\\s?)|(\\n))";
 
-    public ParagraphParser() {
-        super(new SentenceParser());
+    public ParagraphParser(AbstractParser nextParser) {
+        this.nextParser = nextParser;
     }
 
     @Override

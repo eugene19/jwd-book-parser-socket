@@ -1,7 +1,7 @@
 package by.epamtc.degtyarovea.service;
 
 import by.epamtc.degtyarovea.dao.BookDAO;
-import by.epamtc.degtyarovea.dao.impl.FileBookDAO;
+import by.epamtc.degtyarovea.dao.DAOFactory;
 import by.epamtc.degtyarovea.entity.TextComponent;
 import by.epamtc.degtyarovea.entity.TextComposite;
 
@@ -14,7 +14,12 @@ public class BookService {
 
     private final static int PAR = 0;
     private final static int SENT = 0;
-    private BookDAO dao = new FileBookDAO();
+
+    private BookDAO dao;
+
+    public BookService() {
+        this.dao = DAOFactory.getInstance().getBookDAO();
+    }
 
     private int maxWords(Map<Integer, Integer> sentenceAndCountPair) {
         int maxLength = 0;
@@ -74,7 +79,7 @@ public class BookService {
         TextComposite wordsInFirstSentence = (TextComposite) firstSentence;
 
         for (TextComponent child : wordsInFirstSentence.getChildren()) {
-            if (!anyOtherSentensesContainWord(child)) {
+            if (!anyOtherSentencesContainWord(child)) {
                 return child.text();
             }
         }
@@ -82,7 +87,7 @@ public class BookService {
         return "Such word is absent.";
     }
 
-    private boolean anyOtherSentensesContainWord(TextComponent child) {
+    private boolean anyOtherSentencesContainWord(TextComponent child) {
         TextComponent book = dao.createBook();
         List<TextComponent> paragraphs = ((TextComposite) book).getChildren();
         for (int i = 0; i < paragraphs.size(); i++) {

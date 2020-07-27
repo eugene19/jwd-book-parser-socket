@@ -11,8 +11,8 @@ public class SentenceParser extends AbstractParser {
 
     private static final String WORD_PATTERN = "(([-\\w\\.\\n]+\\s?)|([-=()'%,\\\":;]\\s?))";
 
-    public SentenceParser() {
-        super(null);
+    public SentenceParser(AbstractParser nextParser) {
+        this.nextParser = nextParser;
     }
 
     @Override

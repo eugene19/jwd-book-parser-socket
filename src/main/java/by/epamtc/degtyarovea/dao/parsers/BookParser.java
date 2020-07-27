@@ -11,8 +11,8 @@ public class BookParser extends AbstractParser {
 
     private static final String PARAGRAPH_PATTERN = ".+\\n*";
 
-    public BookParser() {
-        super(new ParagraphParser());
+    public BookParser(AbstractParser nextParser) {
+        this.nextParser = nextParser;
     }
 
     @Override
