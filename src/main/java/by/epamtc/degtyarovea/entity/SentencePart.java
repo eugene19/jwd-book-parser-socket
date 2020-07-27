@@ -2,12 +2,17 @@ package by.epamtc.degtyarovea.entity;
 
 import java.util.Objects;
 
-public class SentencePart implements TextComponent {
+public class SentencePart extends TextComponent {
 
     private String sentencePart;
-    private TextComponentType type;
 
     public SentencePart(String word) {
+        super(TextComponentType.PARAGRAPH);
+        this.sentencePart = word;
+    }
+
+    public SentencePart(String word, TextComponentType type) {
+        super(type);
         this.sentencePart = word;
     }
 

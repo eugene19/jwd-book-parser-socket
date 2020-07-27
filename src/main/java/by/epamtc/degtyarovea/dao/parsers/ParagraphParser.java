@@ -1,6 +1,7 @@
 package by.epamtc.degtyarovea.dao.parsers;
 
 import by.epamtc.degtyarovea.entity.TextComponent;
+import by.epamtc.degtyarovea.entity.TextComponentType;
 import by.epamtc.degtyarovea.entity.TextComposite;
 
 import java.util.regex.Matcher;
@@ -16,7 +17,7 @@ public class ParagraphParser extends AbstractParser {
 
     @Override
     public TextComponent parse(String text) {
-        TextComposite paragraph = new TextComposite();
+        TextComposite paragraph = new TextComposite(TextComponentType.PARAGRAPH);
         Matcher matcher = Pattern.compile(SENTENCE_PATTERN).matcher(text);
 
         while (matcher.find()) {

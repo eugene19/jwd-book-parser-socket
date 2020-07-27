@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class TextComposite implements TextComponent {
+public class TextComposite extends TextComponent {
 
     private List<TextComponent> children;
 
     public TextComposite() {
+        super(TextComponentType.PARAGRAPH);
+        this.children = new ArrayList<>();
+    }
+
+    public TextComposite(TextComponentType type) {
+        super(type);
         this.children = new ArrayList<>();
     }
 

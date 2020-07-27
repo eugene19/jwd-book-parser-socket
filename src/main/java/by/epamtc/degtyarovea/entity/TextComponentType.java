@@ -1,5 +1,5 @@
 package by.epamtc.degtyarovea.entity;
 
 public enum TextComponentType {
-    TEXT, CODE
+    BOOK, PARAGRAPH, SENTENCE, WORD, PUNCTUATION, CODE
 }

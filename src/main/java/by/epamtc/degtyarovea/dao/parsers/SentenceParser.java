@@ -2,6 +2,7 @@ package by.epamtc.degtyarovea.dao.parsers;
 
 import by.epamtc.degtyarovea.entity.SentencePart;
 import by.epamtc.degtyarovea.entity.TextComponent;
+import by.epamtc.degtyarovea.entity.TextComponentType;
 import by.epamtc.degtyarovea.entity.TextComposite;
 
 import java.util.regex.Matcher;
@@ -17,12 +18,12 @@ public class SentenceParser extends AbstractParser {
 
     @Override
     public TextComponent parse(String text) {
-        TextComposite sentence = new TextComposite();
+        TextComposite sentence = new TextComposite(TextComponentType.SENTENCE);
         Matcher matcher = Pattern.compile(WORD_PATTERN).matcher(text);
 
         while (matcher.find()) {
             String word = matcher.group();
-            sentence.addChildren(new SentencePart(word));
+            sentence.addChildren(new SentencePart(word, TextComponentType.WORD));
         }
 
         return sentence;

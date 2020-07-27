@@ -3,7 +3,17 @@ package by.epamtc.degtyarovea.entity;
 /**
  * Pattern 'Composite'
  */
-public interface TextComponent {
+public abstract class TextComponent {
 
-    String text();
+    protected TextComponentType type;
+
+    public TextComponent(TextComponentType type) {
+        this.type = type;
+    }
+
+    public abstract String text();
+
+    public final TextComponentType getType() {
+        return type;
+    }
 }

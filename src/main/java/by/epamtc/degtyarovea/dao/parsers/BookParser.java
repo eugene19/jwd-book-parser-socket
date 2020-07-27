@@ -2,6 +2,7 @@ package by.epamtc.degtyarovea.dao.parsers;
 
 import by.epamtc.degtyarovea.entity.SentencePart;
 import by.epamtc.degtyarovea.entity.TextComponent;
+import by.epamtc.degtyarovea.entity.TextComponentType;
 import by.epamtc.degtyarovea.entity.TextComposite;
 
 import java.util.regex.Matcher;
@@ -17,7 +18,7 @@ public class BookParser extends AbstractParser {
 
     @Override
     public TextComponent parse(String text) {
-        TextComposite book = new TextComposite();
+        TextComposite book = new TextComposite(TextComponentType.BOOK);
         Matcher matcher = Pattern.compile(PARAGRAPH_PATTERN).matcher(text);
 
         while (matcher.find()) {
@@ -43,10 +44,9 @@ public class BookParser extends AbstractParser {
                     }
                 }
 
-                TextComposite sentence = new TextComposite();
-                sentence.addChildren(new SentencePart(codeLines.toString()));
-
-                TextComposite paragr = new TextComposite();
+                TextComposite paragr = new TextComposite(TextComponentType.PARAGRAPH);
+                TextComposite sentence = new TextComposite(TextComponentType.SENTENCE);
+                sentence.addChildren(new SentencePart(codeLines.toString(), TextComponentType.CODE));
                 paragr.addChildren(sentence);
                 book.addChildren(paragr);
             } else {
