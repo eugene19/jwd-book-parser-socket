@@ -44,8 +44,8 @@ public class BookParser extends AbstractParser {
                     }
                 }
 
-                TextComposite paragr = new TextComposite(TextComponentType.PARAGRAPH);
-                TextComposite sentence = new TextComposite(TextComponentType.SENTENCE);
+                TextComposite paragr = new TextComposite(TextComponentType.CODE);
+                TextComposite sentence = new TextComposite(TextComponentType.CODE);
                 sentence.addChildren(new SentencePart(codeLines.toString(), TextComponentType.CODE));
                 paragr.addChildren(sentence);
                 book.addChildren(paragr);

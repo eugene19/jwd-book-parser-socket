@@ -20,6 +20,14 @@ public class SentencePart extends TextComponent {
         return String.valueOf(sentencePart);
     }
 
+    public String getSentencePart() {
+        return sentencePart;
+    }
+
+    public void setSentencePart(String sentencePart) {
+        this.sentencePart = sentencePart;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

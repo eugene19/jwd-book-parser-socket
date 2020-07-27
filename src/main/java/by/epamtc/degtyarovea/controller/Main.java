@@ -1,5 +1,6 @@
 package by.epamtc.degtyarovea.controller;
 
+import by.epamtc.degtyarovea.entity.TextComponent;
 import by.epamtc.degtyarovea.service.BookService;
 
 public class Main {
@@ -8,9 +9,15 @@ public class Main {
         BookService service = new BookService();
         String firstSentence;
 
-        firstSentence = service.orderSentencesByWordsCount();
-        //firstSentence = service.wordInFirstSentenceAbsentInAnother();
+//        firstSentence = service.orderSentencesByWordsCount();
+//        firstSentence = service.wordInFirstSentenceAbsentInAnother();
+//        System.out.println(firstSentence);
 
-        System.out.println(firstSentence);
+        TextComponent textComponent;
+
+        //textComponent = service.replaceWordsConcreteLengthInSentence(3, 2, "***");
+        textComponent = service.replaceFirstAndLastWordsInSentence();
+
+        TextComponentPrinter.printToConsole(textComponent);
     }
 }

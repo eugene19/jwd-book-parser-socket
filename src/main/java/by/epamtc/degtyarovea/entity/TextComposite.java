@@ -8,11 +8,6 @@ public class TextComposite extends TextComponent {
 
     private List<TextComponent> children;
 
-    public TextComposite() {
-        super(TextComponentType.PARAGRAPH);
-        this.children = new ArrayList<>();
-    }
-
     public TextComposite(TextComponentType type) {
         super(type);
         this.children = new ArrayList<>();

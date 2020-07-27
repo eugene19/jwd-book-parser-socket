@@ -12,9 +12,15 @@ public class WordParser extends AbstractParser {
 
     @Override
     public TextComponent parse(String text) {
-        if (text.contains("{")) {
-            return new SentencePart(text, TextComponentType.CODE);
-        }
-        return new SentencePart(text, TextComponentType.PARAGRAPH);
+//        if (text.matches("([-=()'%,\\\":;])")) {
+//            return new SentencePart(text, TextComponentType.PUNCTUATION);
+//        }
+//        if (text.matches("(\\s+)")) {
+//            return new SentencePart(text, TextComponentType.SPACE);
+//        }
+//        if (text.contains("{")) {
+//            return new SentencePart(text, TextComponentType.CODE);
+//        }
+        return new SentencePart(text, TextComponentType.WORD);
     }
 }

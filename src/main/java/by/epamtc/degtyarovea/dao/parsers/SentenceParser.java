@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class SentenceParser extends AbstractParser {
 
-    private static final String WORD_PATTERN = "(([-\\w\\.\\n]+\\s?)|([-=()'%,\\\":;]\\s?))";
+    private static final String WORD_PATTERN = "(([-\\w]+)|([-\\.=()'%,\\\":;])|(\\s+))";
 
     public SentenceParser(AbstractParser nextParser) {
         this.nextParser = nextParser;
@@ -23,7 +23,16 @@ public class SentenceParser extends AbstractParser {
 
         while (matcher.find()) {
             String word = matcher.group();
-            sentence.addChildren(new SentencePart(word, TextComponentType.WORD));
+
+            if (word.matches("[-\\.=()'%,\\\":;]")) {
+                sentence.addChildren(new SentencePart(word, TextComponentType.PUNCTUATION));
+            } else if (word.matches("(\\s+)")) {
+                sentence.addChildren(new SentencePart(word, TextComponentType.SPACE));
+            } else if (word.contains("{")) {
+                sentence.addChildren(new SentencePart(word, TextComponentType.CODE));
+            } else {
+                sentence.addChildren(new SentencePart(word, TextComponentType.WORD));
+            }
         }
 
         return sentence;
