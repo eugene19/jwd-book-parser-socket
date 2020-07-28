@@ -28,8 +28,6 @@ public class LexemeParser extends AbstractParser {
                 sentence.addChildren(new Lexeme(word, TextComponentType.PUNCTUATION));
             } else if (word.matches("(\\s+)")) {
                 sentence.addChildren(new Lexeme(word, TextComponentType.SPACE));
-            } else if (word.contains("{")) {
-                sentence.addChildren(new Lexeme(word, TextComponentType.CODE));
             } else {
                 sentence.addChildren(new Lexeme(word, TextComponentType.WORD));
             }
