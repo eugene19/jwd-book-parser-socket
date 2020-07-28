@@ -2,7 +2,7 @@ package by.epamtc.degtyarovea.service;
 
 import by.epamtc.degtyarovea.dao.BookDAO;
 import by.epamtc.degtyarovea.dao.DAOFactory;
-import by.epamtc.degtyarovea.entity.SentencePart;
+import by.epamtc.degtyarovea.entity.Lexeme;
 import by.epamtc.degtyarovea.entity.TextComponent;
 import by.epamtc.degtyarovea.entity.TextComponentType;
 import by.epamtc.degtyarovea.entity.TextComposite;
@@ -149,7 +149,7 @@ public class BookService {
         List<TextComponent> words = ((TextComposite) concreteSentence).getChildren();
         for (TextComponent word : words) {
             if (word.text().length() == wordLength) {
-                ((SentencePart) word).setSentencePart(text);
+                ((Lexeme) word).setLexeme(text);
             }
         }
 

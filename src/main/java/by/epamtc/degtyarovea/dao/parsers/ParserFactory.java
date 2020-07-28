@@ -14,7 +14,7 @@ public final class ParserFactory {
 
     public AbstractParser getParser() {
         if (parser == null) {
-            parser = new BookParser(new ParagraphParser(new SentenceParser(new WordParser(null))));
+            parser = new ParagraphParser(new SentenceParser(new LexemeParser(null)));
         }
         return parser;
     }

@@ -13,10 +13,6 @@ public class TextComposite extends TextComponent {
         this.children = new ArrayList<>();
     }
 
-    public List<TextComponent> getChildren() {
-        return children;
-    }
-
     @Override
     public String text() {
         StringBuilder builder = new StringBuilder();
@@ -34,6 +30,10 @@ public class TextComposite extends TextComponent {
 
     public void removeChildren(TextComponent component) {
         this.children.remove(component);
+    }
+
+    public List<TextComponent> getChildren() {
+        return children;
     }
 
     @Override
