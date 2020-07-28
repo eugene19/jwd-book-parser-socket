@@ -1,8 +1,9 @@
 package by.epamtc.degtyarovea.dao.impl;
 
 import by.epamtc.degtyarovea.dao.BookDAO;
-import by.epamtc.degtyarovea.dao.impl.parsers.AbstractParser;
 import by.epamtc.degtyarovea.dao.impl.parsers.ParserFactory;
+import by.epamtc.degtyarovea.dao.impl.reader.BookReaderFactory;
+import by.epamtc.degtyarovea.dao.impl.reader.FileBookReader;
 import by.epamtc.degtyarovea.entity.TextComponent;
 
 import java.io.IOException;
@@ -13,7 +14,7 @@ public class FileBookDAO implements BookDAO {
     private AbstractParser parser;
 
     public FileBookDAO() {
-        this.reader = new FileBookReader();
+        this.reader = BookReaderFactory.getInstance().getFileBookReader();
         this.parser = ParserFactory.getInstance().getParser();
     }
 
@@ -22,7 +23,7 @@ public class FileBookDAO implements BookDAO {
         TextComponent book = null;
 
         try {
-            String text = reader.readAllText();
+            String text = reader.read();
             book = parser.parse(text);
         } catch (IOException e) {
             e.printStackTrace();

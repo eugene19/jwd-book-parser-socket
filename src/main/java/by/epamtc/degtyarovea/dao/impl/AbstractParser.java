@@ -1,4 +1,4 @@
-package by.epamtc.degtyarovea.dao.impl.parsers;
+package by.epamtc.degtyarovea.dao.impl;
 
 import by.epamtc.degtyarovea.entity.TextComponent;
 

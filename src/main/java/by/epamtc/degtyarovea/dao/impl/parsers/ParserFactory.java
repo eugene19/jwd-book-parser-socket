@@ -1,5 +1,7 @@
 package by.epamtc.degtyarovea.dao.impl.parsers;
 
+import by.epamtc.degtyarovea.dao.impl.AbstractParser;
+
 public final class ParserFactory {
 
     private static final ParserFactory factory = new ParserFactory();

@@ -1,5 +1,6 @@
 package by.epamtc.degtyarovea.dao.impl.parsers;
 
+import by.epamtc.degtyarovea.dao.impl.AbstractParser;
 import by.epamtc.degtyarovea.dao.impl.PatternManager;
 import by.epamtc.degtyarovea.entity.TextComponent;
 import by.epamtc.degtyarovea.entity.TextComponentType;

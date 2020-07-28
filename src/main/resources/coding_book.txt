@@ -1,6 +1,6 @@
 Onew two three four last. New then end.
 
-The coding book "Hello Java".
+The coding book "Hello java".
 
 1.  The if-then and if-then-else Statements
 1.1.    The if-then Statement
