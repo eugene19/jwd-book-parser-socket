@@ -15,7 +15,7 @@ public class LexemeParser extends AbstractParser {
     private final Pattern pattern;
 
     public LexemeParser(AbstractParser nextParser) {
-        this.nextParser = nextParser;
+        super(nextParser);
         this.pattern = Pattern.compile(PatternManager.getLexeme());
     }
 

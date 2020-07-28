@@ -22,7 +22,7 @@ public class BookService {
 
     // Task #2
     public String orderSentencesByWordsCount() {
-        TextComponent book = dao.createBook();
+        TextComponent book = takeBook();
         Map<Integer, Integer> sentenceAndCountPair = new LinkedHashMap<>();
         List<String> sentencesList = new ArrayList();
         int sentenceCount = 0;

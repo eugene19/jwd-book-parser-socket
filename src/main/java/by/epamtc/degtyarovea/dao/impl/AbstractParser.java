@@ -4,9 +4,10 @@ import by.epamtc.degtyarovea.entity.TextComponent;
 
 public abstract class AbstractParser {
 
-    protected AbstractParser nextParser;
+    private AbstractParser nextParser;
 
-    public AbstractParser() {
+    public AbstractParser(AbstractParser nextParser) {
+        this.nextParser = nextParser;
     }
 
     public TextComponent parseNext(String text) {

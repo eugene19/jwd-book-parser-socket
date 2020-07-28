@@ -14,7 +14,7 @@ public class SentenceParser extends AbstractParser {
     private final Pattern pattern;
 
     public SentenceParser(AbstractParser nextParser) {
-        this.nextParser = nextParser;
+        super(nextParser);
         this.pattern = Pattern.compile(PatternManager.getSentence());
     }
 

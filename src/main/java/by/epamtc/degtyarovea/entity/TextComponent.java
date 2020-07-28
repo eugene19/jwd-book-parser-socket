@@ -5,7 +5,7 @@ package by.epamtc.degtyarovea.entity;
  */
 public abstract class TextComponent {
 
-    protected TextComponentType type;
+    private TextComponentType type;
 
     public TextComponent(TextComponentType type) {
         this.type = type;

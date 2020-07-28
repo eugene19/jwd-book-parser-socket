@@ -10,7 +10,7 @@ public class TextComposite extends TextComponent {
 
     public TextComposite(TextComponentType type) {
         super(type);
-        this.children = new ArrayList<>();
+        children = new ArrayList<>();
     }
 
     @Override
@@ -25,11 +25,11 @@ public class TextComposite extends TextComponent {
     }
 
     public void addChildren(TextComponent component) {
-        this.children.add(component);
+        children.add(component);
     }
 
     public void removeChildren(TextComponent component) {
-        this.children.remove(component);
+        children.remove(component);
     }
 
     public List<TextComponent> getChildren() {

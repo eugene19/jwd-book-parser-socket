@@ -4,20 +4,17 @@ import by.epamtc.degtyarovea.dao.impl.AbstractParser;
 
 public final class ParserFactory {
 
-    private static final ParserFactory factory = new ParserFactory();
-    private AbstractParser parser;
+    private static final ParserFactory instance = new ParserFactory();
+    private AbstractParser parser = new ParagraphParser(new SentenceParser(new LexemeParser(null)));
 
     private ParserFactory() {
     }
 
     public static ParserFactory getInstance() {
-        return factory;
+        return instance;
     }
 
     public AbstractParser getParser() {
-        if (parser == null) {
-            parser = new ParagraphParser(new SentenceParser(new LexemeParser(null)));
-        }
         return parser;
     }
 }

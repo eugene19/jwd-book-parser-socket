@@ -12,10 +12,6 @@ public class Lexeme extends TextComponent {
     }
 
     public String text() {
-        return String.valueOf(lexeme);
-    }
-
-    public String getLexeme() {
         return lexeme;
     }
 
@@ -40,7 +36,7 @@ public class Lexeme extends TextComponent {
     public String toString() {
         return "Lexeme{" +
                 "lexeme='" + lexeme + '\'' +
-                ", type=" + type +
+                ", type=" + getType() +
                 '}';
     }
 }
