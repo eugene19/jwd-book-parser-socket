@@ -1,8 +1,8 @@
 package by.epamtc.degtyarovea.dao.impl;
 
 import by.epamtc.degtyarovea.dao.BookDAO;
-import by.epamtc.degtyarovea.dao.parsers.AbstractParser;
-import by.epamtc.degtyarovea.dao.parsers.ParserFactory;
+import by.epamtc.degtyarovea.dao.impl.parsers.AbstractParser;
+import by.epamtc.degtyarovea.dao.impl.parsers.ParserFactory;
 import by.epamtc.degtyarovea.entity.TextComponent;
 
 import java.io.IOException;

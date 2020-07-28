@@ -1,5 +1,6 @@
-package by.epamtc.degtyarovea.dao.parsers;
+package by.epamtc.degtyarovea.dao.impl.parsers;
 
+import by.epamtc.degtyarovea.dao.impl.PatternManager;
 import by.epamtc.degtyarovea.entity.TextComponent;
 import by.epamtc.degtyarovea.entity.TextComponentType;
 import by.epamtc.degtyarovea.entity.TextComposite;
@@ -9,10 +10,11 @@ import java.util.regex.Pattern;
 
 public class SentenceParser extends AbstractParser {
 
-    private final Pattern pattern = Pattern.compile(".+?(([.!?]\\s?)|(\\n))");
+    private final Pattern pattern;
 
     public SentenceParser(AbstractParser nextParser) {
         this.nextParser = nextParser;
+        this.pattern = Pattern.compile(PatternManager.getSentence());
     }
 
     @Override

@@ -15,8 +15,8 @@ public class Main {
 
         TextComponent textComponent;
 
-        //textComponent = service.replaceWordsConcreteLengthInSentence(3, 2, "***");
-        textComponent = service.replaceFirstAndLastWordsInSentence();
+        textComponent = service.replaceWordsConcreteLengthInSentence(4, 2, "***");
+        //textComponent = service.replaceFirstAndLastWordsInSentence();
 
         TextComponentPrinter.printToConsole(textComponent);
     }

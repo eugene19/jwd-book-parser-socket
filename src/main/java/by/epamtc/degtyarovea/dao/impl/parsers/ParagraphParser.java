@@ -1,5 +1,6 @@
-package by.epamtc.degtyarovea.dao.parsers;
+package by.epamtc.degtyarovea.dao.impl.parsers;
 
+import by.epamtc.degtyarovea.dao.impl.PatternManager;
 import by.epamtc.degtyarovea.entity.Lexeme;
 import by.epamtc.degtyarovea.entity.TextComponent;
 import by.epamtc.degtyarovea.entity.TextComponentType;
@@ -10,10 +11,11 @@ import java.util.regex.Pattern;
 
 public class ParagraphParser extends AbstractParser {
 
-    private final Pattern pattern = Pattern.compile(".+\\n*");
+    private final Pattern pattern;
 
     public ParagraphParser(AbstractParser nextParser) {
         this.nextParser = nextParser;
+        this.pattern = Pattern.compile(PatternManager.getParagraph());
     }
 
     @Override

@@ -1,5 +1,6 @@
-package by.epamtc.degtyarovea.dao.parsers;
+package by.epamtc.degtyarovea.dao.impl.parsers;
 
+import by.epamtc.degtyarovea.dao.impl.PatternManager;
 import by.epamtc.degtyarovea.entity.Lexeme;
 import by.epamtc.degtyarovea.entity.TextComponent;
 import by.epamtc.degtyarovea.entity.TextComponentType;
@@ -10,10 +11,11 @@ import java.util.regex.Pattern;
 
 public class LexemeParser extends AbstractParser {
 
-    private final Pattern pattern = Pattern.compile("(([-\\w]+)|([-.=()'%,\":;])|(\\s+))");
+    private final Pattern pattern;
 
     public LexemeParser(AbstractParser nextParser) {
         this.nextParser = nextParser;
+        this.pattern = Pattern.compile(PatternManager.getLexeme());
     }
 
     @Override
