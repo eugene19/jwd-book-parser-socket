@@ -1,4 +1,4 @@
-package by.epamtc.degtyarovea.dao.impl.reader;
+package by.epamtc.degtyarovea.dao.impl;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,25 +6,19 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Objects;
 
-public class SmallFileBookReader implements FileBookReader {
+public class FileBookReader {
+
+    private static final String BOOK_FILENAME = "coding_book.txt";
 
     private File file;
-    private boolean end = false;
 
-    public SmallFileBookReader() {
+    public FileBookReader() {
         ClassLoader loader = getClass().getClassLoader();
         String filePath = Objects.requireNonNull(loader.getResource(BOOK_FILENAME)).getFile();
         this.file = new File(filePath);
     }
 
-    @Override
-    public String readText() throws IOException {
-        end = true;
+    public String readAllText() throws IOException {
         return new String(Files.readAllBytes(Paths.get(file.toURI())));
-    }
-
-    @Override
-    public boolean isEnd() {
-        return end;
     }
 }

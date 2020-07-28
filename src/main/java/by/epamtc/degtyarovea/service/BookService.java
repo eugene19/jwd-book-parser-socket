@@ -7,7 +7,6 @@ import by.epamtc.degtyarovea.entity.TextComponent;
 import by.epamtc.degtyarovea.entity.TextComponentType;
 import by.epamtc.degtyarovea.entity.TextComposite;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -23,7 +22,7 @@ public class BookService {
 
     // Task #2
     public String orderSentencesByWordsCount() {
-        TextComponent book = takeBook();
+        TextComponent book = dao.createBook();
         Map<Integer, Integer> sentenceAndCountPair = new LinkedHashMap<>();
         List<String> sentencesList = new ArrayList();
         int sentenceCount = 0;
@@ -185,12 +184,6 @@ public class BookService {
     }
 
     private TextComponent takeBook() {
-        // TODO: 7/28/20 Change try catch
-        try {
-            return dao.createBook();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return dao.createBook();
     }
 }
