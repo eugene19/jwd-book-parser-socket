@@ -20,20 +20,7 @@ public class BookService {
         this.dao = DAOFactory.getInstance().getBookDAO();
     }
 
-    private int maxWords(Map<Integer, Integer> sentenceAndCountPair) {
-        int maxLength = 0;
-        int maxSen = 0;
-
-        for (Map.Entry<Integer, Integer> entry : sentenceAndCountPair.entrySet()) {
-            if (maxLength < entry.getValue()) {
-                maxLength = entry.getValue();
-                maxSen = entry.getKey();
-            }
-        }
-
-        return maxSen;
-    }
-
+    // Task #2
     public String orderSentencesByWordsCount() {
         TextComponent book = dao.createBook();
         Map<Integer, Integer> sentenceAndCountPair = new LinkedHashMap<>();
@@ -69,16 +56,30 @@ public class BookService {
         return sortedSent.toString();
     }
 
+    private int maxWords(Map<Integer, Integer> sentenceAndCountPair) {
+        int maxLength = 0;
+        int maxSen = 0;
+
+        for (Map.Entry<Integer, Integer> entry : sentenceAndCountPair.entrySet()) {
+            if (maxLength < entry.getValue()) {
+                maxLength = entry.getValue();
+                maxSen = entry.getKey();
+            }
+        }
+
+        return maxSen;
+    }
+
+
+    // Task #3
     public String wordInFirstSentenceAbsentInAnother() {
-        TextComponent book = dao.createBook();
-        List<TextComponent> paragraphs = ((TextComposite) book).getChildren();
-        TextComponent firstParagraph = paragraphs.get(0);
-        List<TextComponent> sentences = ((TextComposite) firstParagraph).getChildren();
+        TextComponent book = takeBook();
+        List<TextComponent> sentences = takeSentencesWithoutCode(book);
         TextComponent firstSentence = sentences.get(0);
 
-        TextComposite wordsInFirstSentence = (TextComposite) firstSentence;
+        List<TextComponent> wordsInFirstSentence = ((TextComposite) firstSentence).getChildren();
 
-        for (TextComponent child : wordsInFirstSentence.getChildren()) {
+        for (TextComponent child : wordsInFirstSentence) {
             if (!anyOtherSentencesContainWord(child)) {
                 return child.text();
             }
@@ -88,20 +89,15 @@ public class BookService {
     }
 
     private boolean anyOtherSentencesContainWord(TextComponent child) {
-        TextComponent book = dao.createBook();
-        List<TextComponent> paragraphs = ((TextComposite) book).getChildren();
-        for (int i = 0; i < paragraphs.size(); i++) {
-            List<TextComponent> sentences = ((TextComposite) paragraphs.get(i)).getChildren();
-            for (int j = 0; j < sentences.size(); j++) {
-                if (i == 0 && j == 0) {
-                    continue;
-                }
-                List<TextComponent> words = ((TextComposite) sentences.get(j)).getChildren();
+        TextComponent book = takeBook();
+        List<TextComponent> sentences = takeSentences(book);
 
-                for (TextComponent word : words) {
-                    if (word.equals(child)) {
-                        return true;
-                    }
+        for (int i = 1; i < sentences.size(); i++) {
+            List<TextComponent> words = ((TextComposite) sentences.get(i)).getChildren();
+
+            for (TextComponent word : words) {
+                if (word.equals(child)) {
+                    return true;
                 }
             }
         }
@@ -109,9 +105,11 @@ public class BookService {
         return false;
     }
 
+
+    // Task #5
     public TextComponent replaceFirstAndLastWordsInSentence() {
-        TextComponent book = getBook();
-        List<TextComponent> sentences = getSentences(book);
+        TextComponent book = takeBook();
+        List<TextComponent> sentences = takeSentences(book);
 
         for (TextComponent sentence : sentences) {
             if (sentence.getType() != TextComponentType.CODE) {
@@ -141,9 +139,11 @@ public class BookService {
         }
     }
 
+
+    // Task #16
     public TextComponent replaceWordsConcreteLengthInSentence(int wordLength, int sentenceNumber, String text) {
-        TextComponent book = getBook();
-        List<TextComponent> sentences = getSentences(book);
+        TextComponent book = takeBook();
+        List<TextComponent> sentences = takeSentences(book);
         TextComponent concreteSentence = sentences.get(sentenceNumber);
 
         List<TextComponent> words = ((TextComposite) concreteSentence).getChildren();
@@ -156,10 +156,10 @@ public class BookService {
         return book;
     }
 
-    private List<TextComponent> getSentencesWithoutCode(TextComponent book) {
+    private List<TextComponent> takeSentencesWithoutCode(TextComponent book) {
         List<TextComponent> sentences = new ArrayList<>();
 
-        for (TextComponent paragraph : getParagraphs(book)) {
+        for (TextComponent paragraph : takeParagraphs(book)) {
             if (paragraph.getType() != TextComponentType.CODE) {
                 sentences.addAll(((TextComposite) paragraph).getChildren());
             }
@@ -168,11 +168,10 @@ public class BookService {
         return sentences;
     }
 
-
-    private List<TextComponent> getSentences(TextComponent book) {
+    private List<TextComponent> takeSentences(TextComponent book) {
         List<TextComponent> sentences = new ArrayList<>();
 
-        for (TextComponent paragraph : getParagraphs(book)) {
+        for (TextComponent paragraph : takeParagraphs(book)) {
             List<TextComponent> paragraphSentences = ((TextComposite) paragraph).getChildren();
             sentences.addAll(paragraphSentences);
         }
@@ -180,11 +179,11 @@ public class BookService {
         return sentences;
     }
 
-    private List<TextComponent> getParagraphs(TextComponent book) {
+    private List<TextComponent> takeParagraphs(TextComponent book) {
         return ((TextComposite) book).getChildren();
     }
 
-    private TextComponent getBook() {
+    private TextComponent takeBook() {
         return dao.createBook();
     }
 }
