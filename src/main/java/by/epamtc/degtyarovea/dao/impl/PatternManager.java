@@ -6,13 +6,14 @@ import java.util.Properties;
 
 public class PatternManager {
 
-    private static final String PATTERNS_FILEPATH = "src/main/resources/patterns.properties";
+    private static final String PATTERNS_FILEPATH = "resources/patterns.properties";
+    private static final PatternManager instance = new PatternManager();
 
-    private static String paragraph = ".+\\n*";
-    private static String sentence = ".+?(([.!?]\\s?)|(\\n))";
-    private static String lexeme = "(([-\\w]+)|([-.=()'%,\":;])|(\\s+))";
+    private String paragraph = ".+\\n*";
+    private String sentence = ".+?(([.!?]\\s?)|(\\n))";
+    private String lexeme = "(([-\\w]+)|([-.=()'%,\":;])|(\\s+))";
 
-    static {
+    private PatternManager() {
         Properties properties = new Properties();
         try {
             properties.load(new FileInputStream(PATTERNS_FILEPATH));
@@ -24,15 +25,19 @@ public class PatternManager {
         }
     }
 
-    public static String getParagraph() {
+    public static PatternManager getInstance() {
+        return instance;
+    }
+
+    public String getParagraph() {
         return paragraph;
     }
 
-    public static String getSentence() {
+    public String getSentence() {
         return sentence;
     }
 
-    public static String getLexeme() {
+    public String getLexeme() {
         return lexeme;
     }
 }

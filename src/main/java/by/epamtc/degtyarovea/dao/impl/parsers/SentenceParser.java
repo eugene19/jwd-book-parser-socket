@@ -15,7 +15,7 @@ public class SentenceParser extends AbstractParser {
 
     public SentenceParser(AbstractParser nextParser) {
         super(nextParser);
-        this.pattern = Pattern.compile(PatternManager.getSentence());
+        this.pattern = Pattern.compile(PatternManager.getInstance().getSentence());
     }
 
     @Override

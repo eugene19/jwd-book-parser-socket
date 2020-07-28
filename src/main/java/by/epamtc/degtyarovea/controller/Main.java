@@ -10,8 +10,8 @@ public class Main {
         BookService service = BookServiceFactory.getInstance().getBookService();
         TextComponent textComponent;
 
-        textComponent = service.replaceWordsConcreteLengthInSentence(4, 2, "***");
-        textComponent = service.wordInFirstSentenceAbsentInAnother();
+//        textComponent = service.replaceWordsConcreteLengthInSentence(4, 2, "***");
+//        textComponent = service.wordInFirstSentenceAbsentInAnother();
         textComponent = service.replaceFirstAndLastWordsInSentence();
 
         TextComponentPrinter.printToConsole(textComponent);

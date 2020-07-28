@@ -16,7 +16,7 @@ public class ParagraphParser extends AbstractParser {
 
     public ParagraphParser(AbstractParser nextParser) {
         super(nextParser);
-        this.pattern = Pattern.compile(PatternManager.getParagraph());
+        this.pattern = Pattern.compile(PatternManager.getInstance().getParagraph());
     }
 
     @Override
