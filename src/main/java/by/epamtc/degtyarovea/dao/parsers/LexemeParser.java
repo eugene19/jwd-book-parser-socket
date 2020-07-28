@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class LexemeParser extends AbstractParser {
 
-    private static final String LEXEME_PATTERN = "(([-\\w]+)|([-\\.=()'%,\\\":;])|(\\s+))";
+    private final Pattern pattern = Pattern.compile("(([-\\w]+)|([-.=()'%,\":;])|(\\s+))");
 
     public LexemeParser(AbstractParser nextParser) {
         this.nextParser = nextParser;
@@ -19,12 +19,12 @@ public class LexemeParser extends AbstractParser {
     @Override
     public TextComponent parse(String text) {
         TextComposite sentence = new TextComposite(TextComponentType.SENTENCE);
-        Matcher matcher = Pattern.compile(LEXEME_PATTERN).matcher(text);
+        Matcher matcher = pattern.matcher(text);
 
         while (matcher.find()) {
             String word = matcher.group();
 
-            if (word.matches("[-\\.=()'%,\\\":;]")) {
+            if (word.matches("[-.=()'%,\":;]")) {
                 sentence.addChildren(new Lexeme(word, TextComponentType.PUNCTUATION));
             } else if (word.matches("(\\s+)")) {
                 sentence.addChildren(new Lexeme(word, TextComponentType.SPACE));

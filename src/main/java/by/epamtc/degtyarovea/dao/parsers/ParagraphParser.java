@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class ParagraphParser extends AbstractParser {
 
-    private static final String PARAGRAPH_PATTERN = ".+\\n*";
+    private final Pattern pattern = Pattern.compile(".+\\n*");
 
     public ParagraphParser(AbstractParser nextParser) {
         this.nextParser = nextParser;
@@ -19,14 +19,14 @@ public class ParagraphParser extends AbstractParser {
     @Override
     public TextComponent parse(String text) {
         TextComposite book = new TextComposite(TextComponentType.BOOK);
-        Matcher matcher = Pattern.compile(PARAGRAPH_PATTERN).matcher(text);
+        Matcher matcher = pattern.matcher(text);
 
         while (matcher.find()) {
-            String paragraph = matcher.group();
+            String paragraphGroup = matcher.group();
 
-            if (paragraph.contains("{")) {
+            if (paragraphGroup.contains("{")) {
                 int bracketsCount = 1;
-                StringBuilder codeLines = new StringBuilder(paragraph);
+                StringBuilder codeLines = new StringBuilder(paragraphGroup);
 
                 while (matcher.find()) {
                     String line = matcher.group();
@@ -44,13 +44,13 @@ public class ParagraphParser extends AbstractParser {
                     }
                 }
 
-                TextComposite paragr = new TextComposite(TextComponentType.CODE);
+                TextComposite paragraph = new TextComposite(TextComponentType.CODE);
                 TextComposite sentence = new TextComposite(TextComponentType.CODE);
                 sentence.addChildren(new Lexeme(codeLines.toString(), TextComponentType.CODE));
-                paragr.addChildren(sentence);
-                book.addChildren(paragr);
+                paragraph.addChildren(sentence);
+                book.addChildren(paragraph);
             } else {
-                TextComponent paragraphComponent = parseNext(paragraph);
+                TextComponent paragraphComponent = parseNext(paragraphGroup);
                 book.addChildren(paragraphComponent);
             }
         }

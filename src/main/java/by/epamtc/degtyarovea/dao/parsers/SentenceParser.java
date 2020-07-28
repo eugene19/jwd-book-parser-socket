@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class SentenceParser extends AbstractParser {
 
-    private static final String SENTENCE_PATTERN = ".+?(([.!?]\\s?)|(\\n))";
+    private final Pattern pattern = Pattern.compile(".+?(([.!?]\\s?)|(\\n))");
 
     public SentenceParser(AbstractParser nextParser) {
         this.nextParser = nextParser;
@@ -18,7 +18,7 @@ public class SentenceParser extends AbstractParser {
     @Override
     public TextComponent parse(String text) {
         TextComposite paragraph = new TextComposite(TextComponentType.PARAGRAPH);
-        Matcher matcher = Pattern.compile(SENTENCE_PATTERN).matcher(text);
+        Matcher matcher = pattern.matcher(text);
 
         while (matcher.find()) {
             String sentence = matcher.group();
