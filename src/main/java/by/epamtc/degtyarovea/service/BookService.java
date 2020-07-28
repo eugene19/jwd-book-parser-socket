@@ -72,7 +72,7 @@ public class BookService {
 
 
     // Task #3
-    public String wordInFirstSentenceAbsentInAnother() {
+    public TextComponent wordInFirstSentenceAbsentInAnother() {
         TextComponent book = takeBook();
         List<TextComponent> sentences = takeSentencesWithoutCode(book);
         TextComponent firstSentence = sentences.get(0);
@@ -81,11 +81,11 @@ public class BookService {
 
         for (TextComponent child : wordsInFirstSentence) {
             if (!anyOtherSentencesContainWord(child)) {
-                return child.text();
+                return child;
             }
         }
 
-        return "There is no word unique.";
+        return null;
     }
 
     private boolean anyOtherSentencesContainWord(TextComponent child) {

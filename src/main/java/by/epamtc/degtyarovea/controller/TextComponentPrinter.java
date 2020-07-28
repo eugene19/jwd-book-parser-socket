@@ -5,6 +5,10 @@ import by.epamtc.degtyarovea.entity.TextComponent;
 public class TextComponentPrinter {
 
     public static void printToConsole(TextComponent composite) {
-        System.out.println(composite.text());
+        if (composite == null) {
+            System.out.println("There is no text.");
+        } else {
+            System.out.println(composite.text());
+        }
     }
 }

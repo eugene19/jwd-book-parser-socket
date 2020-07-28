@@ -7,16 +7,11 @@ public class Main {
 
     public static void main(String[] args) {
         BookService service = new BookService();
-        String firstSentence;
-
-//        firstSentence = service.orderSentencesByWordsCount();
-//        firstSentence = service.wordInFirstSentenceAbsentInAnother();
-//        System.out.println(firstSentence);
-
         TextComponent textComponent;
 
         //textComponent = service.replaceWordsConcreteLengthInSentence(4, 2, "***");
-        textComponent = service.replaceFirstAndLastWordsInSentence();
+        //textComponent = service.replaceFirstAndLastWordsInSentence();
+        textComponent = service.wordInFirstSentenceAbsentInAnother();
 
         TextComponentPrinter.printToConsole(textComponent);
     }
