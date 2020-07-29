@@ -1,6 +1,7 @@
 package by.epamtc.degtyarovea.service.impl;
 
 import by.epamtc.degtyarovea.dao.BookDAO;
+import by.epamtc.degtyarovea.dao.BookDAOException;
 import by.epamtc.degtyarovea.dao.DAOFactory;
 import by.epamtc.degtyarovea.entity.Lexeme;
 import by.epamtc.degtyarovea.entity.TextComponent;
@@ -189,6 +190,14 @@ public class BookServiceImpl implements BookService {
     }
 
     private TextComponent takeBook() {
-        return dao.createBook();
+        TextComponent book = new TextComposite(TextComponentType.BOOK);
+
+        try {
+            book = dao.createBook();
+        } catch (BookDAOException e) {
+            e.printStackTrace();
+        }
+
+        return book;
     }
 }

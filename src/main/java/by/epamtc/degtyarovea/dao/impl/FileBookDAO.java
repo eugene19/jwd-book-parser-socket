@@ -1,6 +1,7 @@
 package by.epamtc.degtyarovea.dao.impl;
 
 import by.epamtc.degtyarovea.dao.BookDAO;
+import by.epamtc.degtyarovea.dao.BookDAOException;
 import by.epamtc.degtyarovea.dao.impl.parsers.ParserFactory;
 import by.epamtc.degtyarovea.dao.impl.reader.BookReaderFactory;
 import by.epamtc.degtyarovea.dao.impl.reader.FileBookReader;
@@ -19,15 +20,14 @@ public class FileBookDAO implements BookDAO {
     }
 
     @Override
-    public TextComponent createBook() {
-        TextComponent book = null;
+    public TextComponent createBook() throws BookDAOException {
+        TextComponent book;
 
         try {
             String text = reader.read();
             book = parser.parse(text);
         } catch (IOException e) {
-            // TODO: 7/28/20 Add throw DAO exception
-            e.printStackTrace();
+            throw new BookDAOException("Error of reading file: ", e);
         }
 
         return book;
