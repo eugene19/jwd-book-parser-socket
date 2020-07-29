@@ -4,22 +4,28 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Objects;
 
+/**
+ * Read all file as one part.
+ */
 public class SmallFileBookReader implements FileBookReader {
 
-    private static final String BOOK_FILENAME = "coding_book.txt";
-
     private File file;
+    private boolean allFileRead;
 
-    public SmallFileBookReader() {
-        ClassLoader loader = getClass().getClassLoader();
-        String filePath = Objects.requireNonNull(loader.getResource(BOOK_FILENAME)).getFile();
-        this.file = new File(filePath);
+    public SmallFileBookReader(File file) {
+        this.file = file;
+        allFileRead = false;
     }
 
     @Override
-    public String read() throws IOException {
+    public boolean hasNextPart() {
+        return !allFileRead;
+    }
+
+    @Override
+    public String nextPart() throws IOException {
+        allFileRead = true;
         return new String(Files.readAllBytes(Paths.get(file.toURI())));
     }
 }

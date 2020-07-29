@@ -8,12 +8,12 @@ public class Main {
 
     public static void main(String[] args) {
         BookService service = BookServiceFactory.getInstance().getBookService();
-        TextComponent textComponent;
+        TextComponent book;
 
-//        textComponent = service.replaceWordsConcreteLengthInSentence(4, 2, "***");
-//        textComponent = service.wordInFirstSentenceAbsentInAnother();
-        textComponent = service.replaceFirstAndLastWordsInSentence();
+        book = service.replaceWordsConcreteLengthInSentence(4, 2, "***");
+//        book = service.wordInFirstSentenceAbsentInAnother();
+//        book = service.replaceFirstAndLastWordsInSentence();
 
-        TextComponentPrinter.printToConsole(textComponent);
+        TextComponentPrinter.printToConsole(book);
     }
 }

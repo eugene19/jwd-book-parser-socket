@@ -1,9 +1,12 @@
 package by.epamtc.degtyarovea.dao.impl.reader;
 
+import java.io.File;
+
 public final class BookReaderFactory {
 
+    private static final int BIG_FILE_SIZE = 10_000;
+
     private static final BookReaderFactory instance = new BookReaderFactory();
-    private final FileBookReader fileBookReader = new SmallFileBookReader();
 
     private BookReaderFactory() {
     }
@@ -12,7 +15,7 @@ public final class BookReaderFactory {
         return instance;
     }
 
-    public FileBookReader getFileBookReader() {
-        return fileBookReader;
+    public FileBookReader getFileBookReader(File file) {
+        return (file.length() > BIG_FILE_SIZE) ? new BigFileBookReader(file) : new SmallFileBookReader(file);
     }
 }
