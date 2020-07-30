@@ -40,13 +40,14 @@ public class TextComposite extends TextComponent {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         TextComposite that = (TextComposite) o;
         return Objects.equals(children, that.children);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(children);
+        return Objects.hash(super.hashCode(), children);
     }
 
     @Override

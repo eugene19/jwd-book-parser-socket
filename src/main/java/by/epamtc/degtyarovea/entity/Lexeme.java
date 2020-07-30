@@ -23,20 +23,20 @@ public class Lexeme extends TextComponent {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Lexeme that = (Lexeme) o;
-        return Objects.equals(lexeme, that.lexeme);
+        if (!super.equals(o)) return false;
+        Lexeme lexeme1 = (Lexeme) o;
+        return Objects.equals(lexeme, lexeme1.lexeme);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lexeme);
+        return Objects.hash(super.hashCode(), lexeme);
     }
 
     @Override
     public String toString() {
         return "Lexeme{" +
                 "lexeme='" + lexeme + '\'' +
-                ", type=" + getType() +
                 '}';
     }
 }
