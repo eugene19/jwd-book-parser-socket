@@ -27,9 +27,9 @@ public class LexemeParser extends AbstractParser {
         while (matcher.find()) {
             String word = matcher.group();
 
-            if (word.matches("[-.=()'%,\":;]")) {
+            if (word.matches(PatternManager.getInstance().getPunctuation())) {
                 sentence.addChildren(new Lexeme(word, TextComponentType.PUNCTUATION));
-            } else if (word.matches("(\\s+)")) {
+            } else if (word.matches(PatternManager.getInstance().getSpace())) {
                 sentence.addChildren(new Lexeme(word, TextComponentType.SPACE));
             } else {
                 sentence.addChildren(new Lexeme(word, TextComponentType.WORD));

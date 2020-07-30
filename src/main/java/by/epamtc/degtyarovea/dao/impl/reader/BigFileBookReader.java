@@ -7,17 +7,15 @@ public class BigFileBookReader implements FileBookReader {
     private static final int PART_SIZE = 10;
 
     private File file;
-    private long fileSize;
     private long readSize;
 
     public BigFileBookReader(File file) {
         this.file = file;
-        fileSize = file.length();
     }
 
     @Override
     public boolean hasNextPart() {
-        return fileSize > readSize;
+        return file.length() > readSize;
     }
 
     @Override
@@ -25,7 +23,6 @@ public class BigFileBookReader implements FileBookReader {
         Reader input = new BufferedReader(new FileReader(file));
         StringBuilder paragraph = new StringBuilder();
 
-        //noinspection ResultOfMethodCallIgnored
         input.skip(readSize);
 
         // TODO: make decomposition

@@ -13,6 +13,8 @@ public class PatternManager {
     private String paragraph = ".+\\n*";
     private String sentence = ".+?(([.!?]\\s?)|(\\n))";
     private String lexeme = "(([-\\w]+)|([-.=()'%,\":;])|(\\s+))";
+    private String punctuation = "[-.=()'%,\":;]";
+    private String space = "\\s+";
 
     private PatternManager() {
         ClassLoader loader = getClass().getClassLoader();
@@ -24,6 +26,8 @@ public class PatternManager {
             paragraph = properties.getProperty("paragraph.pattern");
             sentence = properties.getProperty("sentence.pattern");
             lexeme = properties.getProperty("lexeme.pattern");
+            punctuation = properties.getProperty("punctuation.pattern");
+            space = properties.getProperty("space.pattern");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,5 +47,13 @@ public class PatternManager {
 
     public String getLexeme() {
         return lexeme;
+    }
+
+    public String getPunctuation() {
+        return punctuation;
+    }
+
+    public String getSpace() {
+        return space;
     }
 }
