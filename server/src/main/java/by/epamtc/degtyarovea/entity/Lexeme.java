@@ -1,8 +1,11 @@
 package by.epamtc.degtyarovea.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Lexeme extends TextComponent {
+public class Lexeme extends TextComponent implements Serializable {
+
+    private static final long serialVersionUID = -4434060706007270916L;
 
     private String lexeme;
 

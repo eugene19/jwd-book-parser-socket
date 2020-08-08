@@ -1,11 +1,11 @@
 package by.epamtc.degtyarovea.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-/**
- * Pattern 'Composite'
- */
-public abstract class TextComponent {
+public abstract class TextComponent implements Serializable {
+
+    private static final long serialVersionUID = -4144518069185535077L;
 
     private TextComponentType type;
 
