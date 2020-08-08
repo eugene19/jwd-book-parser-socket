@@ -3,7 +3,6 @@ package by.epamtc.degtyarovea.dao.impl;
 import by.epamtc.degtyarovea.dao.BookDAO;
 import by.epamtc.degtyarovea.dao.BookDAOException;
 import by.epamtc.degtyarovea.dao.impl.parsers.ParserFactory;
-import by.epamtc.degtyarovea.dao.impl.reader.BookReaderFactory;
 import by.epamtc.degtyarovea.dao.impl.reader.FileBookReader;
 import by.epamtc.degtyarovea.entity.TextComponent;
 import by.epamtc.degtyarovea.entity.TextComponentType;
@@ -24,8 +23,7 @@ public class FileBookDAO implements BookDAO {
     public FileBookDAO() {
         ClassLoader loader = getClass().getClassLoader();
         String filePath = Objects.requireNonNull(loader.getResource(BOOK_FILENAME)).getFile();
-
-        this.reader = BookReaderFactory.getInstance().getFileBookReader(new File(filePath));
+        this.reader = new FileBookReader(new File(filePath));
         this.parser = ParserFactory.getInstance().getParser();
     }
 
@@ -33,14 +31,12 @@ public class FileBookDAO implements BookDAO {
     public TextComponent createBook() throws BookDAOException {
         TextComposite book = new TextComposite(TextComponentType.BOOK);
 
-        while (reader.hasNextPart()) {
-            try {
-                String text = reader.nextPart();
-                TextComponent bookPart = parser.parse(text);
-                addAllParts(book, (TextComposite) bookPart);
-            } catch (IOException e) {
-                throw new BookDAOException("Error of reading file: ", e);
-            }
+        try {
+            String text = reader.readAllText();
+            TextComponent bookPart = parser.parse(text);
+            addAllParts(book, (TextComposite) bookPart);
+        } catch (IOException e) {
+            throw new BookDAOException("Error of reading file: ", e);
         }
 
         return book;

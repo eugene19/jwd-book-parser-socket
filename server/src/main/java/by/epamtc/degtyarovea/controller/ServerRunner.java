@@ -11,47 +11,49 @@ public class ServerRunner {
 
     private static final int PORT = 5555;
 
+    private static BookService service = BookServiceFactory.getInstance().getBookService();
+
     private static ServerSocket server;
     private static BufferedReader input;
     private static BufferedWriter output;
-
-    private static BookService service = BookServiceFactory.getInstance().getBookService();
 
     public static void main(String[] args) throws IOException {
         try {
             server = new ServerSocket(PORT);
 
-            try (Socket clientSocket = server.accept()) {
-                input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                output = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+            while (true) {
+                try (Socket clientSocket = server.accept()) {
+                    input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                    output = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
 
-                String request = input.readLine();
-                System.out.println("Client received: " + request);
+                    String request = input.readLine();
 
-                switch (request) {
-                    case "REPLACE WORD WITH LENGTH":
-                        output.write(test1());
-                        break;
-                    case "GET WORD IN FIRST SENTENCE":
-                        output.write(test2());
-                        break;
-                    case "REPLACE FIRST AND LAST WORDS":
-                        output.write(test3());
-                        break;
-                    default:
-                        throw new IllegalArgumentException();
+                    System.out.println("REQUEST: " + request);
+
+                    switch (request) {
+                        case "REPLACE WORD WITH LENGTH":
+                            output.write(test1());
+                            break;
+                        case "GET WORD IN FIRST SENTENCE":
+                            output.write(test2());
+                            break;
+                        case "REPLACE FIRST AND LAST WORDS":
+                            output.write(test3());
+                            break;
+                        default:
+                            throw new IllegalArgumentException();
+                    }
+                    output.flush();
+
+                } finally {
+                    input.close();
+                    output.close();
                 }
-                output.flush();
-
-            } finally {
-                input.close();
-                output.close();
             }
         } finally {
             server.close();
         }
     }
-
 
     private static String test1() {
         return service.replaceWordsConcreteLengthInSentence(4, 2, "***").text();

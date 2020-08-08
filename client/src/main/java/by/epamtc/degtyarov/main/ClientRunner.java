@@ -15,55 +15,33 @@ public class ClientRunner {
     public static void main(String[] args) throws IOException {
 
         try {
-            clientSocket = new Socket(HOST, PORT);
-
-            input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            output = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
-
             Menu menu = new Menu();
-            String action = menu.selectAction();
-            System.out.println("ACTION " + action);
+            String action;
 
-            output.write(action + "\n");
-            output.flush();
+            while ((action = menu.selectAction()) != null) {
+                clientSocket = new Socket(HOST, PORT);
 
-            StringBuilder response = new StringBuilder();
-            String line;
+                input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                output = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
 
-            while ((line = input.readLine()) != null) {
-                response.append(line).append("\n");
+                output.write(action + "\n");
+                output.flush();
+
+                StringBuilder response = new StringBuilder();
+                String line;
+
+                while ((line = input.readLine()) != null) {
+                    response.append(line).append("\n");
+                }
+
+                System.out.println("****************************************");
+                System.out.println(response);
+                System.out.println("****************************************");
             }
-
-            System.out.println(response);
-
         } finally {
             clientSocket.close();
             input.close();
             output.close();
         }
-
-//        try {
-//            Socket socket = new Socket(HOST, PORT);
-//            Menu menu = new Menu();
-//            String action = menu.selectAction();
-//
-//            System.out.println("ACTION " + action);
-//
-//            BufferedWriter output = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-//            output.write(action);
-//            output.flush();
-//
-//
-//            BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//
-//            String response = input.readLine();
-//
-//            System.out.println("RESPONSE: " + response);
-//
-//            Thread.currentThread().wait(5000);
-//
-//        } catch (IOException | InterruptedException e) {
-//            e.printStackTrace();
-//        }
     }
 }
