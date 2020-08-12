@@ -1,4 +1,4 @@
-package by.epamtc.degtyarov.main;
+package by.epamtc.degtyarovea.main;
 
 import java.util.Scanner;
 

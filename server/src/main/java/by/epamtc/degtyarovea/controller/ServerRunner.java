@@ -1,5 +1,6 @@
 package by.epamtc.degtyarovea.controller;
 
+import by.epamtc.degtyarovea.entity.TextComponent;
 import by.epamtc.degtyarovea.service.BookService;
 import by.epamtc.degtyarovea.service.BookServiceFactory;
 
@@ -14,8 +15,8 @@ public class ServerRunner {
     private static BookService service = BookServiceFactory.getInstance().getBookService();
 
     private static ServerSocket server;
-    private static BufferedReader input;
-    private static BufferedWriter output;
+    private static ObjectInput input;
+    private static ObjectOutput output;
 
     public static void main(String[] args) throws IOException {
         try {
@@ -23,28 +24,25 @@ public class ServerRunner {
 
             while (true) {
                 try (Socket clientSocket = server.accept()) {
-                    input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                    output = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+                    output = new ObjectOutputStream(clientSocket.getOutputStream());
+                    input = new ObjectInputStream(clientSocket.getInputStream());
 
                     String request = input.readLine();
 
-                    System.out.println("REQUEST: " + request);
-
                     switch (request) {
                         case "REPLACE WORD WITH LENGTH":
-                            output.write(test1());
+                            output.writeObject(test1());
                             break;
                         case "GET WORD IN FIRST SENTENCE":
-                            output.write(test2());
+                            output.writeObject(test2());
                             break;
                         case "REPLACE FIRST AND LAST WORDS":
-                            output.write(test3());
+                            output.writeObject(test3());
                             break;
                         default:
                             throw new IllegalArgumentException();
                     }
                     output.flush();
-
                 } finally {
                     input.close();
                     output.close();
@@ -55,15 +53,15 @@ public class ServerRunner {
         }
     }
 
-    private static String test1() {
-        return service.replaceWordsConcreteLengthInSentence(4, 2, "***").text();
+    private static TextComponent test1() {
+        return service.replaceWordsConcreteLengthInSentence(4, 2, "***");
     }
 
-    private static String test2() {
-        return service.wordInFirstSentenceAbsentInAnother().text();
+    private static TextComponent test2() {
+        return service.wordInFirstSentenceAbsentInAnother();
     }
 
-    private static String test3() {
-        return service.replaceFirstAndLastWordsInSentence().text();
+    private static TextComponent test3() {
+        return service.replaceFirstAndLastWordsInSentence();
     }
 }
