@@ -30,13 +30,13 @@ public class ServerRunner {
                     String request = input.readLine();
 
                     switch (request) {
-                        case "REPLACE WORD WITH LENGTH":
+                        case "Replace words concrete length in sentence.":
                             output.writeObject(test1());
                             break;
-                        case "GET WORD IN FIRST SENTENCE":
+                        case "Word In First Sentence Absent In Another.":
                             output.writeObject(test2());
                             break;
-                        case "REPLACE FIRST AND LAST WORDS":
+                        case "Replace First And Last Words In Sentence.":
                             output.writeObject(test3());
                             break;
                         default:
