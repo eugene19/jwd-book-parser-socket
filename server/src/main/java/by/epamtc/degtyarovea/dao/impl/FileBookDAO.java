@@ -3,7 +3,6 @@ package by.epamtc.degtyarovea.dao.impl;
 import by.epamtc.degtyarovea.dao.BookDAO;
 import by.epamtc.degtyarovea.dao.BookDAOException;
 import by.epamtc.degtyarovea.dao.impl.parsers.ParserFactory;
-import by.epamtc.degtyarovea.dao.impl.reader.FileBookReader;
 import by.epamtc.degtyarovea.entity.TextComponent;
 import by.epamtc.degtyarovea.entity.TextComponentType;
 import by.epamtc.degtyarovea.entity.TextComposite;

@@ -2,6 +2,8 @@ package by.epamtc.degtyarovea.dao;
 
 public class BookDAOException extends Exception {
 
+    private static final long serialVersionUID = -8420205656779270129L;
+
     public BookDAOException() {
     }
 
