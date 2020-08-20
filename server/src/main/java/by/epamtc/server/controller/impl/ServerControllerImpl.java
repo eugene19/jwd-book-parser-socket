@@ -23,25 +23,30 @@ public class ServerControllerImpl implements ServerController {
         try (ServerSocket server = new ServerSocket(port)) {
 
             while (true) {
-                try (Socket clientSocket = server.accept();
-                     ObjectOutput output = new ObjectOutputStream(clientSocket.getOutputStream());
-                     ObjectInput input = new ObjectInputStream(clientSocket.getInputStream())
-                ) {
-                    String request = input.readLine();
+                Socket clientSocket = server.accept();
 
-                    switch (request) {
-                        case "Replace words concrete length in sentence.":
-                            output.writeObject(replaceWordsConcreteLength());
-                            break;
-                        case "Word in first sentence absent in another.":
-                            output.writeObject(wordInFirstSentenceAbsentInAnother());
-                            break;
-                        case "Replace first and last words in sentence.":
-                            output.writeObject(replaceFirstAndLastWordsInSentence());
-                            break;
+                new Thread(() -> {
+                    try (ObjectOutput output = new ObjectOutputStream(clientSocket.getOutputStream());
+                         ObjectInput input = new ObjectInputStream(clientSocket.getInputStream())
+                    ) {
+                        String request = input.readLine();
+
+                        switch (request) {
+                            case "Replace words concrete length in sentence.":
+                                output.writeObject(replaceWordsConcreteLength());
+                                break;
+                            case "Word in first sentence absent in another.":
+                                output.writeObject(wordInFirstSentenceAbsentInAnother());
+                                break;
+                            case "Replace first and last words in sentence.":
+                                output.writeObject(replaceFirstAndLastWordsInSentence());
+                                break;
+                        }
+                        output.flush();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                    output.flush();
-                }
+                }).start();
             }
         } catch (IOException e) {
             e.printStackTrace();
