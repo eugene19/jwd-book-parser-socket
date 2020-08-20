@@ -1,12 +1,16 @@
 package by.epamtc.client.controller.impl;
 
 import by.epamtc.client.controller.ClientController;
-import by.epamtc.client.entity.TextComponent;
+import by.epamtc.client.view.ConsoleMenu;
+import by.epamtc.server.entity.TextComponent;
 
 import java.io.*;
 import java.net.Socket;
 
 public class ConsoleClientController implements ClientController {
+
+    private static final String HOST = "localhost";
+    private static final int PORT = 5555;
 
     private ConsoleMenu consoleMenu = new ConsoleMenu();
 

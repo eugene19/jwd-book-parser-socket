@@ -1,4 +1,4 @@
-package by.epamtc.client.controller.impl;
+package by.epamtc.client.view;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
