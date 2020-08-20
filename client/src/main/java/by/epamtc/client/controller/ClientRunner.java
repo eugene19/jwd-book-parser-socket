@@ -6,6 +6,6 @@ public class ClientRunner {
 
     public static void main(String[] args) {
         ClientController service = new ConsoleClientController();
-        service.start();
+        service.run();
     }
 }

@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class ConsoleMenu {
 
     private Map<Integer, String> actions = new LinkedHashMap<>();
+
     private Scanner scanner = new Scanner(System.in);
 
     {
@@ -17,24 +18,16 @@ public class ConsoleMenu {
     }
 
     public String selectAction() {
-        printMenuToConsole();
+        int number = scanner.nextInt();
 
-        while (true) {
-            int number = scanner.nextInt();
-
-            if (!actions.containsKey(number)) {
-                System.err.println("Wrong number of action: " + number);
-            } else {
-                return actions.get(number);
-            }
+        if (!actions.containsKey(number)) {
+            throw new IllegalArgumentException("Wrong number of action: " + number);
+        } else {
+            return actions.get(number);
         }
     }
 
-    private void printMenuToConsole() {
-        System.out.println("Select number of action:");
-
-        for (Map.Entry<Integer, String> entry : actions.entrySet()) {
-            System.out.printf("%d. %s\n", entry.getKey(), entry.getValue());
-        }
+    public Map<Integer, String> getActions() {
+        return actions;
     }
 }
