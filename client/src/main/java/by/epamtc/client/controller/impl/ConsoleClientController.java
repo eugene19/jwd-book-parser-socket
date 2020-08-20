@@ -3,6 +3,7 @@ package by.epamtc.client.controller.impl;
 import by.epamtc.client.controller.ClientController;
 import by.epamtc.client.view.ConsoleMenu;
 import by.epamtc.client.view.ConsolePrinter;
+import by.epamtc.client.view.WrongMenuActionException;
 import by.epamtc.server.entity.TextComponent;
 
 import java.io.*;
@@ -24,7 +25,7 @@ public class ConsoleClientController implements ClientController {
             String request;
             try {
                 request = menu.selectAction();
-            } catch (IllegalArgumentException e) {
+            } catch (WrongMenuActionException e) {
                 printer.printError(e.getMessage());
                 continue;
             }
