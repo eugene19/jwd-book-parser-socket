@@ -11,11 +11,16 @@ import java.net.Socket;
 
 public class ServerControllerImpl implements ServerController {
 
-    private static final int PORT = 5555;
-    private BookService service = BookServiceFactory.getInstance().getBookService();
+    private int port;
+    private BookService service;
+
+    public ServerControllerImpl(int port) {
+        this.port = port;
+        this.service = BookServiceFactory.getInstance().getBookService();
+    }
 
     public void run() {
-        try (ServerSocket server = new ServerSocket(PORT)) {
+        try (ServerSocket server = new ServerSocket(port)) {
 
             while (true) {
                 try (Socket clientSocket = server.accept();

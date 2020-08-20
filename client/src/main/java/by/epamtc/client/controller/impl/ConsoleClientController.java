@@ -11,11 +11,17 @@ import java.net.Socket;
 
 public class ConsoleClientController implements ClientController {
 
-    private static final String HOST = "localhost";
-    private static final int PORT = 5555;
+    private String host;
+    private int port;
+    private ConsoleMenu menu;
+    private ConsolePrinter printer;
 
-    private ConsoleMenu menu = new ConsoleMenu();
-    private ConsolePrinter printer = new ConsolePrinter();
+    public ConsoleClientController(String host, int port) {
+        this.host = host;
+        this.port = port;
+        this.menu = new ConsoleMenu();
+        this.printer = new ConsolePrinter();
+    }
 
     @Override
     public void run() {
@@ -42,7 +48,7 @@ public class ConsoleClientController implements ClientController {
     private String sendRequest(String request) {
         String response;
 
-        try (Socket clientSocket = new Socket(HOST, PORT);
+        try (Socket clientSocket = new Socket(host, port);
              ObjectInput input = new ObjectInputStream(clientSocket.getInputStream());
              ObjectOutput output = new ObjectOutputStream(clientSocket.getOutputStream())
         ) {
